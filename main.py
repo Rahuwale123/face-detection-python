@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.routes.search import search_router
-from app.routes.store import store_router
+from app.routes.register import store_router
 
 load_dotenv()
 app = FastAPI()

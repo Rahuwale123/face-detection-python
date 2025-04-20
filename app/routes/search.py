@@ -18,22 +18,22 @@ async def search_employee(file: UploadFile = File(...)):
 
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT name, user_id, department, face_encoding, village FROM Profile_details")
-        Profile_details = cursor.fetchall()
+        cursor.execute("SELECT client_id,group_id,name, department,  face_encoding FROM profile_details")
+        profile_details = cursor.fetchall()
         cursor.close()
         conn.close()
 
-        for name, user_id, department, stored_encoding_json, village in Profile_details:
+        for  client_id,group_id, name,department, stored_encoding_json in profile_details:
             stored_encoding = np.array(json.loads(stored_encoding_json))
             match = face_recognition.compare_faces([stored_encoding], uploaded_encoding, tolerance=0.5)
 
             if match[0]:
                 return {
                     "message": "Employee Found",
+                    "client_id": client_id,
+                    'group_id':group_id,
                     "name": name,
-                    "user_id": user_id,
                     "department": department,
-                    'Village':village
                 }
 
         return {"message": "Employee not found"}

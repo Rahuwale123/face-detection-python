@@ -15,14 +15,13 @@ def create_table_if_not_exists():
     cursor = connection.cursor()
     
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS Profile_details  (
+    CREATE TABLE IF NOT EXISTS profile_details  (
       id INT NOT NULL AUTO_INCREMENT,
+      client_id int not null,
+      group_id INT ,
       name VARCHAR(255) NOT NULL,
-      user_id int not null,
-      age INT ,
       department VARCHAR(255) NOT NULL,
       face_encoding TEXT NOT NULL,
-      village VARCHAR(255) NOT NULL,
       PRIMARY KEY (id)
     );
     """)
